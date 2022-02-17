@@ -13,39 +13,73 @@ function debug($var)
 }
 
 //Class define
+
+class UserStatus
+{
+  /** константы принадлежат КЛАССУ -   // свойства принадлежат ОБЬЕКТУ  
+   *
+   */
+  const CREATED = 0;
+  const ACTIVATED = 1;
+  const BANED = 2;
+
+  /** чтобы  получить доступ к константе класса --- ClassName::CONTANT
+   * UserStatus::ACTIVATED ==== (the value will be 1 )
+   * мы также можем использовать это выражение внутри другого класса - смотри ниже линия 67 ...
+   *  
+   */
+}
+
+
+
+
 class Images
 {
 
-  // the functions bellow CAN be accessed from outside of this class - they are PUBLIC
-  public function upload($file)
+  /**
+   * Status
+   * 0 -> new
+   * 1 -> activated
+   * 2 -> baned
+   */
+
+  // свойства принадлежат ОБЬЕКТУ - // константы принадлежат КЛАССУ -  
+  public $id;
+  public $login;
+  public $name;
+  public $created;
+  private $status;
+  private $now; // doesn't go in the __construct function
+
+
+  public function __construct(int $id, string $login, string $name, int $status, int $created)
   {
-    if ($this->check($file['name'])) {
-      $this->resize($file);
-      $this->watermark($file);
-    }
+    $this->id = $id;
+    $this->login = $login;
+    $this->name = $name;
+    $this->status = $status;
+    $this->created = $created;
+    $this->now = time(); // get the current time
   }
 
-  public function get($id, $resize)
+  public function isActive()
   {
-    // 
+    return $this->status == UserStatus::ACTIVATED;
   }
 
-  // the functions bellow can't be accessed from outside of this class - they are PRIVATE
-  private function resize()
+  public function activated()
   {
-    //
+    $this->status = UserStatus::ACTIVATED;
   }
 
-
-  private function check($path)
+  public function ban()
   {
-    //
+    $this->status = UserStatus::BANED;
   }
 
-
-  private function watermark($img)
+  public function save()
   {
-    //
+    // save db
   }
 }
 
