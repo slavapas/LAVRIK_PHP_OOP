@@ -42,9 +42,15 @@ class Cat extends Animal
 {
 }
 
+class Dog extends Animal
+{
+}
+
+
 // создадим экземпляр или обьект кота
-$murzik = new Animal("Гоша", 100, 10);
-$kisya = new Cat("Гоша", 100, 10);
+$animal = new Animal("Гоша", 100, 10);
+$kisya = new Cat("Murka", 100, 10);
+$doggy = new Dog("Sharik", 100, 10);
 // debug($murzik);
-echo "Murzik " . $murzik->calcDamage() . "\n";
+echo "Животное " . $animal->calcDamage() . "\n";
 echo "Kisya " . $kisya->calcDamage();
