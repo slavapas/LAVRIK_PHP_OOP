@@ -29,11 +29,29 @@ class User
     $this->created = $created;
     $this->now = time(); // get the current time
   }
+
+  public function isActive()
+  {
+    return $this->status == 1;
+  }
+
+  public function activated()
+  {
+    $this->status = 1;
+  }
+
+  public function banned()
+  {
+    $this->status = 0;
+  }
 }
 
 // Create Object from CLass
 $user1 = new User(1, "admin", "slava", 0, 2020);
 $user2 = new User(2, "user", "slava", 0, 2021);
 
+// $user1->banned();
+// $user1->activated();
+$user1->isActive();
 debug($user1);
-debug($user2);
+// debug($user2);
